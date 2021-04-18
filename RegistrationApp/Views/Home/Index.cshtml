@@ -1,0 +1,57 @@
+﻿@model RegistrationModel
+
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<h2>Registration Form</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Register" method="post">
+
+    <div class="form-group">
+        <label asp-for="Name">Enter your full name:</label>
+        <input type="text" asp-for="Name" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address">Enter your full address:</label>
+        <input type="text" asp-for="Address" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone">Enter your phone number</label>
+        <input type="number" asp-for="Phone" class="form-control" maxlength="10">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email">Enter your email address:</label>
+        <input type="text" asp-for="Email" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Age">Enter your age</label>
+        <input type="number" asp-for="Age" class="form-control">
+    </div>
+
+    @{
+        List < SelectListItem > myList = new List<SelectListItem>
+        {
+            new SelectListItem{ Text="Phone", Value = "Phone" },
+            new SelectListItem{ Text="Email", Value = "Email" },
+            new SelectListItem{ Text="Mail", Value = "Phone" },
+        };
+     }
+
+    <div class="form-group">
+        <label asp-for="ContactPreference">Contact Preference:</label>
+        <select asp-for="ContactPreference" class="form-control"
+                asp-items="@(new SelectList(myList, "Value" , "Text"))">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+    <a asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>
